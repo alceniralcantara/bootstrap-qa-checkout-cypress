@@ -1,14 +1,14 @@
 {
   "stats": {
     "suites": 1,
-    "tests": 2,
-    "passes": 2,
+    "tests": 1,
+    "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-10-28T04:52:05.565Z",
-    "end": "2025-10-28T04:52:06.992Z",
-    "duration": 1427,
-    "testsRegistered": 2,
+    "start": "2025-10-28T18:58:56.613Z",
+    "end": "2025-10-28T18:59:00.618Z",
+    "duration": 4005,
+    "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -18,68 +18,49 @@
   },
   "results": [
     {
-      "uuid": "d329736b-937b-4389-8fbd-fdabd7fde55d",
+      "uuid": "995c97cf-a6fd-4d52-ae05-9d2a9c863e79",
       "title": "",
-      "fullFile": "cypress\\e2e\\contract\\products.api.cy.ts",
-      "file": "cypress\\e2e\\contract\\products.api.cy.ts",
+      "fullFile": "cypress\\e2e\\smoke\\checkout.smoke.cy.ts",
+      "file": "cypress\\e2e\\smoke\\checkout.smoke.cy.ts",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "1b2fb482-e3c4-484d-8e88-e7ec051ee86a",
-          "title": "API Contract - Products",
+          "uuid": "e01d8ca5-1ea5-4316-affb-0945f31c4380",
+          "title": "Checkout - Smoke",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "GET /products returns list matching schema",
-              "fullTitle": "API Contract - Products GET /products returns list matching schema",
+              "title": "completes checkout with valid data",
+              "fullTitle": "Checkout - Smoke completes checkout with valid data",
               "timedOut": null,
-              "duration": 933,
+              "duration": 3933,
               "state": "passed",
               "speed": "fast",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "cy.request({\n    method: 'GET',\n    url: 'https://fakestoreapi.com/products',\n    failOnStatusCode: false\n})\n    .then((res) => {\n    expect(res.status).to.eq(200);\n    const validate = ajv.compile({ type: 'array', items: product_schema_json_1.default });\n    expect(validate(res.body)).to.be.true;\n});",
+              "code": "cy.loginStandard();\nconst inventory = new InventoryPage_1.InventoryPage();\nconst cart = new CartPage_1.CartPage();\nconst checkout = new CheckoutPage_1.CheckoutPage();\ninventory.addItemByIndex(0);\ninventory.goToCart();\ncart.assertItems(1);\ncart.checkout();\ncy.fillDefaultCheckoutInfo();\ncheckout.finish();\ncheckout.assertCompleted();",
               "err": {},
-              "uuid": "fd187769-3259-48bc-9393-b04fa2af9a1c",
-              "parentUUID": "1b2fb482-e3c4-484d-8e88-e7ec051ee86a",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "GET /products/:id returns product matching schema",
-              "fullTitle": "API Contract - Products GET /products/:id returns product matching schema",
-              "timedOut": null,
-              "duration": 387,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "cy.request({\n    method: 'GET',\n    url: 'https://fakestoreapi.com/products/1',\n    failOnStatusCode: false\n})\n    .then((res) => {\n    expect(res.status).to.eq(200);\n    const validate = ajv.compile(product_schema_json_1.default);\n    expect(validate(res.body)).to.be.true;\n    expect(res.body.price).to.be.greaterThan(0);\n});",
-              "err": {},
-              "uuid": "1bdb8b28-f635-4f04-bcac-0a22c1a78a15",
-              "parentUUID": "1b2fb482-e3c4-484d-8e88-e7ec051ee86a",
+              "uuid": "59f79c06-1aab-419c-a5f4-b1d5d69f422d",
+              "parentUUID": "e01d8ca5-1ea5-4316-affb-0945f31c4380",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "fd187769-3259-48bc-9393-b04fa2af9a1c",
-            "1bdb8b28-f635-4f04-bcac-0a22c1a78a15"
+            "59f79c06-1aab-419c-a5f4-b1d5d69f422d"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 1320,
+          "duration": 3933,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -114,7 +95,7 @@
     "marge": {
       "options": {
         "reportDir": "cypress/reports",
-        "overwrite": false,
+        "overwrite": true,
         "html": true,
         "json": true
       },

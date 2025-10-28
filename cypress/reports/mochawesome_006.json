@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-28T18:32:36.956Z",
+    "end": "2025-10-28T18:32:37.673Z",
+    "duration": 717,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4d70df60-9eaa-4718-9ac3-6358097d9227",
+      "title": "",
+      "fullFile": "cypress\\e2e\\contract\\POST.products.api.cy.ts",
+      "file": "cypress\\e2e\\contract\\POST.products.api.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b8b66c73-99ba-46cf-bb71-5da470f2a94f",
+          "title": "API Contract - POST",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "POST /products creates product with valid schema",
+              "fullTitle": "API Contract - POST POST /products creates product with valid schema",
+              "timedOut": null,
+              "duration": 606,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', 'https://fakestoreapi.com/products', {\n    title: 'Test Product',\n    price: 29.99,\n    description: 'QA automation test',\n    image: 'https://i.pravatar.cc',\n    category: 'electronics'\n}).then((res) => {\n    expect(res.status).to.eq(201);\n    const validate = ajv.compile(product_schema_json_1.default);\n    expect(validate(res.body)).to.be.true;\n});",
+              "err": {},
+              "uuid": "ba870488-2179-4c48-9ab2-de6deb9237c2",
+              "parentUUID": "b8b66c73-99ba-46cf-bb71-5da470f2a94f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ba870488-2179-4c48-9ab2-de6deb9237c2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 606,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

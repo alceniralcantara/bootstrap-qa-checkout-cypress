@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run",
+    "report:merge": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
+    "report:generate": "npx marge cypress/reports/report.json --reportDir cypress/reports/html",
+    "ci": "npm run test && npm run report:merge && npm run report:generate"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
     "ajv": "^8.17.1",
     "axios": "^1.13.0",
     "cypress": "^15.5.0",
+    "glob": "^11.0.3",
     "junit-report-merger": "^8.0.0",
     "mocha": "^11.7.4",
     "mochawesome": "^7.1.4",
