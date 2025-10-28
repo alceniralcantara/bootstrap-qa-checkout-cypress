@@ -1,5 +1,7 @@
 QA Checkout E2E – Cypress + TS + POM
 
+![CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
+
 ## 🧰 Tech Stack
 
 - Cypress + TypeScript
