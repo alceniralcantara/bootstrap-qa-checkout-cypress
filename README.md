@@ -8,7 +8,7 @@
 
 - Cypress videos and screenshots
 - HTML reports (Mochawesome)
-- Available after each run in ![GitHub Actions](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions)
+- Available after each run in: [GitHub Actions](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions)
 
 ## 🧰 Tech Stack
 
