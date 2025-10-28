@@ -1,5 +1,3 @@
-name: qa-e2e-ci
-
 on:
   push:
     branches: [main]
