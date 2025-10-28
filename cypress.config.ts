@@ -6,6 +6,6 @@ export default defineConfig({
     supportFile: false,
     video: true,
     screenshotOnRunFailure: true,
-    retries: 1
-  }
+    retries: 1,
+  },
 });
