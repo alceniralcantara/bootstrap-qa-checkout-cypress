@@ -14,6 +14,11 @@
     "ajv": "^8.17.1",
     "axios": "^1.13.0",
     "cypress": "^15.5.0",
+    "junit-report-merger": "^8.0.0",
+    "mocha": "^11.7.4",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0",
     "typescript": "^5.9.3"
   }
 }

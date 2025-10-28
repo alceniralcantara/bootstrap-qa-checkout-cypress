@@ -1,56 +1,122 @@
-# QA Checkout E2E – Cypress + TS + POM
+QA Checkout E2E – Cypress + TS + POM
 
-## Tech Stack
+## 🧰 Tech Stack
 
 - Cypress + TypeScript
 - Page Object Model (POM)
 - Ajv for JSON schema validation
 - Axios for API requests
-- GitHub Actions for CI/CD/CT
+- Mochawesome + JUnit for reporting
+- GitHub Actions for CI/CD/CT (cross-browser: Chrome, Firefox, Edge)
 
-## Target Systems
+---
 
-- UI: https://www.saucedemo.com
-- API: https://fakestoreapi.com
+## 🎯 Target Systems
 
-## Setup
+- **UI:** [Sauce Demo](https://www.saucedemo.com) – checkout flow sem pagamento
+- **API:** [Fake Store API](https://fakestoreapi.com) – dados públicos de e-commerce
 
-```bash
+---
+
+## 🚀 Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
+
+````bash
 npm ci
 npx cypress open
-```
 
-## Run Tests
+### 🧪 Running Tests
 
-- All tests: `npm cypress run`
-- Smoke: `npx cypress run --spec cypress/e2e/smoke/checkout.smoke.cy.ts`
-- Regression: `npx cypress run --spec cypress/e2e/regression/*`
-- Negative: `npx cypress run --spec cypress/e2e/negative/*`
-- Contract: `npx cypress run --spec cypress/e2e/contract/*`
+## Run all tests
+```bash
+npm cypress run
 
-## Project Structure
+### Run Suites
 
-- cypress/pages: POM classes
-- cypress/e2e: smoke, regression, negative, contract tests
-- cypress/fixtures: test data
-- cypress/apis/contracts: API schemas
+## Smoke:
+```bash
+npx cypress run --spec cypress/e2e/smoke/*
 
-## Test Coverage
+## Regression:
+```bash
+npx cypress run --spec cypress/e2e/regression/*
 
-- Smoke: full checkout flow
-- Regression: login, cart, summary
-- Negative: address validation
-- Contract: product API schema
+## Negative:
+```bash
+npx cypress run --spec cypress/e2e/negative/*
 
-## CI/CD
+## Contract (GET/POST/PUT):
+```bash
+npx cypress run --spec cypress/e2e/contract/*
 
-- GitHub Actions workflow runs Cypress tests on push/PR
-- Artifacts: videos, screenshots
+### Reports
 
-## Next Steps
+## Merge JSON reports:
+```bash
+npm run report:merge
 
-- Expand regression suite (multi-item checkout, remove items, totals validation)
-- Add API POST/PUT contract tests with mock payloads
-- Integrate reporting (JUnit, Mochawesome) for CI pipelines
-- Add cross-browser testing (Chrome, Firefox, Edge)
-- Seed test data dynamically via API before runs
+## Generate HTML report:
+```bash
+npm run report:generate
+
+### 📁 Project Structure
+
+qa-checkout-cypress/
+├─ cypress/
+│  ├─ e2e/
+│  │  ├─ smoke/            		# Smoke checkout flow
+│  │  ├─ regression/       		# Login, cart, multi-item, totals
+│  │  ├─ negative/         		# Validation and edge cases
+│  │  └─ contract/         		# API schema + POST/PUT contract tests
+│  ├─ fixtures/            		# Test data (users, addresses)
+│  ├─ pages/               		# POM classes
+│  ├─ apis/contracts/      		# JSON schemas
+│  └─ support/             		# Commands + seeding hooks
+├─ cypress.config.ts       		# Cypress config + reporter
+├─ tsconfig.json           		# TypeScript config
+├─ package.json            		# Dependencies and scripts
+├─ README.md               		# Documentation
+└─ .github/workflows/ci.yml		# GitHub Actions CI (cross-browser)
+
+### 🧪 Test Coverage
+
+## ✅ Smoke Tests
+ - Full checkout flow with valid data
+ - Confirmation of order completion
+
+## 🔁 Regression Tests
+ - Login (valid and locked user)
+ - Add/remove items in cart
+ - Multi-item checkout
+ - Totals validation
+
+## ❌ Negative Tests
+ - Missing postal code blocks progression
+ - Error messages validated
+
+## 📄 Contract Tests
+ - GET /products returns valid schema
+ - GET /products/:id returns valid product with price > 0
+ - POST /products creates product with valid schema
+ - PUT /products/:id updates product with valid schema
+
+### 🧼 CI/CD Pipeline
+ - Cross-browser matrix: Chrome, Firefox, Edge
+ - Runs on push and pull requests
+ - Generates Mochawesome reports
+ - Uploads artifacts: videos, screenshots, reports
+
+### 🌱 Data Seeding
+ - Before each test, a product is seeded via POST /products
+ - The seeded product ID is stored in Cypress.env('seedProductId') for use in tests
+
+### 👨‍💻 Author
+## Alcenir Nascimento de Alcantara
+SDET/QA Engineer | Automation Specialist | Strategic Thinker
+````

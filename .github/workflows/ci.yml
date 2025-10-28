@@ -1,21 +1,27 @@
 name: qa-e2e-ci
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - run: npm ci
-      - run: npx cypress run
+      - run: npx cypress run --browser ${{ matrix.browser }}
+      - run: npm run report:merge
+      - run: npm run report:generate
       - uses: actions/upload-artifact@v4
         with:
-          name: cypress-artifacts
+          name: cypress-artifacts-${{ matrix.browser }}
           path: |
             cypress/videos
             cypress/screenshots
+            cypress/reports
