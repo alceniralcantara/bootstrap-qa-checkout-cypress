@@ -1,29 +1,49 @@
+name: qa-e2e-ci
+
 on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+# Prevent duplicate runs on same commit (push + PR)
+concurrency:
+  group: ci-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-  cypress-linux:
+  cypress-run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: 🧰 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests and generate reports
-        run: npm run test
+      - name: 🧪 Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm ci
+          start: npm test
 
-      - name: Upload artifacts
+      - name: 🧾 Merge JSON reports
+        run: npm run report:merge
+
+      - name: 🖼️ Generate HTML report
+        run: npm run report:generate
+
+      - name: 📤 Upload Cypress artifacts
         uses: actions/upload-artifact@v4
         with:
+          name: cypress-artifacts
           path: |
             cypress/videos
             cypress/screenshots
