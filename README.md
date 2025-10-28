@@ -1,9 +1,8 @@
 # QA Checkout E2E – Cypress + TS + POM
 
-### 📦 CI Status!
-
-- Actual CI Status:
 [CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
+### 📦 CI Status!
+- Actual CI Status: [CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
 
 ### 📦 CI Artifacts
 
