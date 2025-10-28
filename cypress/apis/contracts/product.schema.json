@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["id", "title", "price", "category"],
+  "properties": {
+    "id": { "type": "number" },
+    "title": { "type": "string" },
+    "price": { "type": "number" },
+    "category": { "type": "string" },
+    "description": { "type": "string" },
+    "image": { "type": "string" }
+  }
+}

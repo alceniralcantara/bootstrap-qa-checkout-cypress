@@ -1,0 +1,12 @@
+{
+  "default": {
+    "firstName": "Alcenir",
+    "lastName": "Alcantara",
+    "postalCode": "M5V1K4"
+  },
+  "missingPostal": {
+    "firstName": "Alcenir",
+    "lastName": "Alcantara",
+    "postalCode": ""
+  }
+}
