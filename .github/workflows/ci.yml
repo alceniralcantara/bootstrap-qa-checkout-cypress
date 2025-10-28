@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests and generate reports
-        run: npm run ci
+        run: npm run test
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
