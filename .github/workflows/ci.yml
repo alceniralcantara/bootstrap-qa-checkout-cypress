@@ -9,9 +9,6 @@ jobs:
   # Linux job: Chrome + Firefox
   cypress-linux:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,7 +19,6 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          browser: ${{ matrix.browser }}
           build: npm ci
           start: npx cypress run
       - name: Merge reports
@@ -31,7 +27,6 @@ jobs:
         run: npm cypress run report:generate
       - uses: actions/upload-artifact@v4
         with:
-          name: cypress-artifacts-${{ matrix.browser }}
           path: |
             cypress/videos
             cypress/screenshots
