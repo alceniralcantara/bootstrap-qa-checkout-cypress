@@ -1,7 +1,7 @@
 name: qa-e2e-ci
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
 jobs:
   cypress-run:
@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - run: npx cypress run --browser chrome
+      - run: npx cypress run
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts
