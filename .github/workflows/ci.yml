@@ -24,7 +24,7 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           build: npm ci
-          start: npm cypress run
+          start: npx cypress run
       - name: Merge reports
         run: npm cypress run report:merge
       - name: Generate HTML report
