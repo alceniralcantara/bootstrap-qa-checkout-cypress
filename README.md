@@ -18,14 +18,14 @@ QA Checkout E2E – Cypress + TS + POM
 
 ---
 
-## 🚀 Setup
+### 🚀 Setup
 
-### Prerequisites
+## Prerequisites
 
 - Node.js 18+
 - npm
 
-### Installation
+## Installation
 
 ````bash
 npm ci
@@ -35,7 +35,7 @@ npx cypress open
 
 ## Run all tests
 ```bash
-npm cypress run
+npx cypress run
 
 ### Run Suites
 
@@ -59,11 +59,11 @@ npx cypress run --spec cypress/e2e/contract/*
 
 ## Merge JSON reports:
 ```bash
-npm run report:merge
+npx run report:merge
 
 ## Generate HTML report:
 ```bash
-npm run report:generate
+npx run report:generate
 
 ### 📁 Project Structure
 
@@ -107,7 +107,7 @@ qa-checkout-cypress/
  - PUT /products/:id updates product with valid schema
 
 ### 🧼 CI/CD Pipeline
- - Cross-browser matrix: Chrome, Firefox, Edge
+ - Cross-browser matrix: Chrome, Firefox, Edge (To be implemented)
  - Runs on push and pull requests
  - Generates Mochawesome reports
  - Uploads artifacts: videos, screenshots, reports

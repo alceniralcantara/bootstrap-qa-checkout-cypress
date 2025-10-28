@@ -22,9 +22,9 @@ jobs:
           build: npm ci
           start: npx cypress run
       - name: Merge reports
-        run: npm cypress run report:merge
+        run: npx cypress run report:merge
       - name: Generate HTML report
-        run: npm cypress run report:generate
+        run: npx cypress run report:generate
       - uses: actions/upload-artifact@v4
         with:
           path: |
@@ -49,9 +49,9 @@ jobs:
           build: npm ci
           start: npx cypress run
       - name: Merge reports
-        run: npm cypress run report:merge
+        run: npx cypress run report:merge
       - name: Generate HTML report
-        run: npm cypress run report:generate
+        run: npx cypress run report:generate
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts-edge
