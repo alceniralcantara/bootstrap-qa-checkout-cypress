@@ -24,11 +24,11 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           build: npm ci
-          start: npm test
+          start: npm cypress run
       - name: Merge reports
-        run: npm run report:merge
+        run: npm cypress run report:merge
       - name: Generate HTML report
-        run: npm run report:generate
+        run: npm cypress run report:generate
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts-${{ matrix.browser }}
@@ -52,11 +52,11 @@ jobs:
         with:
           browser: edge
           build: npm ci
-          start: npm test
+          start: npm cypress run
       - name: Merge reports
-        run: npm run report:merge
+        run: npm cypress run report:merge
       - name: Generate HTML report
-        run: npm run report:generate
+        run: npm cypress run report:generate
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts-edge
