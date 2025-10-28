@@ -20,6 +20,6 @@ describe('Checkout - Smoke', () => {
     cy.get('[data-test="continue"]').click();
 
     cy.get('[data-test="finish"]').click();
-    cy.get('[data-test="complete-header"]').should('contain.text', 'THANK YOU FOR YOUR ORDER');
+    cy.get('[data-test="complete-header"]').should('contain.text', 'Thank you for your order!');
   });
 });
