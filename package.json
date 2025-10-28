@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run",
-    "report:merge": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
-    "report:generate": "npx marge cypress/reports/report.json --reportDir cypress/reports/html",
+    "report:merge": "npx cypress run report:merge",
+    "report:generate": "npx cypress run report:generate",
     "ci": "npm run test && npm run report:merge && npm run report:generate"
   },
   "keywords": [],
