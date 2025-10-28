@@ -1,26 +1,65 @@
 name: qa-e2e-ci
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
+
 jobs:
-  cypress-run:
+  # Linux job: Chrome + Firefox
+  cypress-linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [chrome, firefox, edge]
+        browser: [chrome, firefox]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm ci
-      - run: npx cypress run --browser ${{ matrix.browser }}
-      - run: npm run report:merge
-      - run: npm run report:generate
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: ${{ matrix.browser }}
+          build: npm ci
+          start: npm test
+      - name: Merge reports
+        run: npm run report:merge
+      - name: Generate HTML report
+        run: npm run report:generate
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts-${{ matrix.browser }}
+          path: |
+            cypress/videos
+            cypress/screenshots
+            cypress/reports
+
+  # Windows job: Edge
+  cypress-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Cypress tests on Edge
+        uses: cypress-io/github-action@v6
+        with:
+          browser: edge
+          build: npm ci
+          start: npm test
+      - name: Merge reports
+        run: npm run report:merge
+      - name: Generate HTML report
+        run: npm run report:generate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts-edge
           path: |
             cypress/videos
             cypress/screenshots
