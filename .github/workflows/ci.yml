@@ -9,22 +9,22 @@ jobs:
   cypress-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+
       - name: Install dependencies
         run: npm ci
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm ci
-          start: npx cypress run
-      - name: Merge reports
-        run: npx cypress run report:merge
-      - name: Generate HTML report
-        run: npx cypress run report:generate
-      - uses: actions/upload-artifact@v4
+
+      - name: Run Cypress tests and generate reports
+        run: npm run ci
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
           path: |
             cypress/videos
