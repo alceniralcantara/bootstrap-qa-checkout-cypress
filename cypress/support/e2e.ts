@@ -1,3 +1,5 @@
+import './commands';
+
 beforeEach(() => {
   // Example: seed product before each test
   cy.request('POST', 'https://fakestoreapi.com/products', {

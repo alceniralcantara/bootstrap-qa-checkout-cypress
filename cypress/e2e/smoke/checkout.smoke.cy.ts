@@ -1,25 +1,23 @@
-import users from '../../fixtures/users.json';
-import addresses from '../../fixtures/addresses.json';
-import { LoginPage } from '../../pages/LoginPage';
+import { InventoryPage } from '../../pages/InventoryPage';
+import { CartPage } from '../../pages/CartPage';
+import { CheckoutPage } from '../../pages/CheckoutPage';
 
 describe('Checkout - Smoke', () => {
   it('completes checkout with valid data', () => {
-    const login = new LoginPage();
+    cy.loginStandard();
 
-    login.visit();
-    login.login(users.standard.username, users.standard.password);
+    const inventory = new InventoryPage();
+    const cart = new CartPage();
+    const checkout = new CheckoutPage();
 
-    cy.get('.inventory_item_name').first().click();
-    cy.get('[data-test^="add-to-cart"]').click();
-    cy.get('.shopping_cart_link').click();
-    cy.get('[data-test="checkout"]').click();
+    inventory.addItemByIndex(0);
+    inventory.goToCart();
 
-    cy.get('[data-test="firstName"]').type(addresses.default.firstName);
-    cy.get('[data-test="lastName"]').type(addresses.default.lastName);
-    cy.get('[data-test="postalCode"]').type(addresses.default.postalCode);
-    cy.get('[data-test="continue"]').click();
+    cart.assertItems(1);
+    cart.checkout();
 
-    cy.get('[data-test="finish"]').click();
-    cy.get('[data-test="complete-header"]').should('contain.text', 'Thank you for your order!');
+    cy.fillDefaultCheckoutInfo();
+    checkout.finish();
+    checkout.assertCompleted();
   });
 });

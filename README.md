@@ -1,4 +1,4 @@
-QA Checkout E2E – Cypress + TS + POM
+# QA Checkout E2E – Cypress + TS + POM
 
 ![CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
 
@@ -6,28 +6,30 @@ QA Checkout E2E – Cypress + TS + POM
 
 - Cypress + TypeScript
 - Page Object Model (POM)
+- Centralized selectors in `cypress/selectors/`
+- Reusable commands in `cypress/support/commands.ts`
 - Ajv for JSON schema validation
 - Axios for API requests
 - Mochawesome + JUnit for reporting
-- GitHub Actions for CI/CD/CT (cross-browser: Chrome, Firefox, Edge)
+- GitHub Actions for CI/CD/CT (currently single‑browser; cross‑browser to be re‑implemented later)
 
 ---
 
 ## 🎯 Target Systems
 
-- **UI:** [Sauce Demo](https://www.saucedemo.com) – checkout flow sem pagamento
-- **API:** [Fake Store API](https://fakestoreapi.com) – dados públicos de e-commerce
+- **UI:** [Sauce Demo](https://www.saucedemo.com) – checkout flow without payment
+- **API:** [Fake Store API](https://fakestoreapi.com) – public e‑commerce data
 
 ---
 
-### 🚀 Setup
+## 🚀 Setup
 
-## Prerequisites
+### Prerequisites
 
 - Node.js 18+
 - npm
 
-## Installation
+### Installation
 
 ````bash
 npm ci
@@ -72,19 +74,23 @@ npx run report:generate
 qa-checkout-cypress/
 ├─ cypress/
 │  ├─ e2e/
-│  │  ├─ smoke/            		# Smoke checkout flow
-│  │  ├─ regression/       		# Login, cart, multi-item, totals
-│  │  ├─ negative/         		# Validation and edge cases
-│  │  └─ contract/         		# API schema + POST/PUT contract tests
-│  ├─ fixtures/            		# Test data (users, addresses)
-│  ├─ pages/               		# POM classes
-│  ├─ apis/contracts/      		# JSON schemas
-│  └─ support/             		# Commands + seeding hooks
-├─ cypress.config.ts       		# Cypress config + reporter
-├─ tsconfig.json           		# TypeScript config
-├─ package.json            		# Dependencies and scripts
-├─ README.md               		# Documentation
-└─ .github/workflows/ci.yml		# GitHub Actions CI (cross-browser)
+│  │  ├─ smoke/             	# Smoke checkout flow
+│  │  ├─ regression/       	 	# Login, cart, multi-item, totals
+│  │  ├─ negative/          	# Validation and edge cases
+│  │  └─ contract/          	# API schema + POST/PUT contract tests
+│  ├─ fixtures/             	# Test data (users, addresses)
+│  ├─ selectors/            	# Centralized selectors
+│  ├─ pages/                	# Page Object Model classes
+│  ├─ apis/contracts/       	# JSON schemas
+│  └─ support/              	# Commands + seeding hooks
+│     ├─ commands.ts        	# Custom reusable commands
+│     └─ e2e.ts             	# Support entry point
+├─ cypress.config.ts        	# Cypress config + reporter
+├─ tsconfig.json            	# TypeScript config
+├─ package.json             	# Dependencies and scripts
+├─ README.md                	# Documentation
+└─ .github/workflows/ci.yml 	# GitHub Actions CI/CT (single-browser, Linux and Windows instances)
+
 
 ### 🧪 Test Coverage
 
@@ -103,20 +109,30 @@ qa-checkout-cypress/
  - Error messages validated
 
 ## 📄 Contract Tests
- - GET /products returns valid schema
- - GET /products/:id returns valid product with price > 0
- - POST /products creates product with valid schema
- - PUT /products/:id updates product with valid schema
+ - GET "/products" returns valid schema
+ - GET "/products/:id" returns valid product with price > 0
+ - POST "/products" creates product with valid schema
+ - PUT "/products/:id" updates product with valid schema
 
 ### 🧼 CI/CD Pipeline
- - Cross-browser matrix: Chrome, Firefox, Edge (To be implemented)
+ - Currently runs on single browser (Electron for Linux and Edge for Windows instances)
+ - Cross-browser matrix: Chrome, Firefox, Edge (Will be implemented later)
  - Runs on push and pull requests
  - Generates Mochawesome reports
  - Uploads artifacts: videos, screenshots, reports
 
 ### 🌱 Data Seeding
- - Before each test, a product is seeded via POST /products
- - The seeded product ID is stored in Cypress.env('seedProductId') for use in tests
+ - Before each test, a product is seeded via "POST /products"
+ - The seeded product ID is stored in "Cypress.env('seedProductId')" for use in tests
+
+### 🗂️ Architecture Diagram
+## Mermaid
+flowchart TD
+    A [Selectors]         -->   B [Page Objects]
+    B [Page Objects]      -->   C [Custom Commands]
+    C [Custom Commands]   -->   D [Tests]
+    D [Tests]             -->   E [Reports & CI/CD]
+
 
 ### 👨‍💻 Author
 ## Alcenir Nascimento de Alcantara
