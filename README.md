@@ -3,14 +3,14 @@
 ### 📦 CI Status!
 
 - Actual CI Status:
-- [CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
+[CI](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions/workflows/ci.yml/badge.svg)
 
 ### 📦 CI Artifacts
 
 - Cypress videos and screenshots
 - HTML reports (Mochawesome)
 - Available after each run in:
-- [GitHub Actions](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions)
+[GitHub Actions](https://github.com/alceniralcantara/bootstrap-qa-checkout-cypress/actions)
 
 ## 🧰 Tech Stack
 
